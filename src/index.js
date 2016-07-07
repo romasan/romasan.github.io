@@ -1,18 +1,11 @@
-var images = {
-  "name": {
-	x: 0,
-	y: 0,
-	width: 320,
-	height: 640,
-	corner: {
-		nw: "a",
-		sw: "b",
-		se: "d",
-		ne: "e"		
+class main {
 	
+	constructor() {
+		console.log(777);
 	}
-  }
-};
+}
+
+window.onload = ()=>{new main();};
 
 var regions = {
   a: {
@@ -53,9 +46,31 @@ var regions = {
   }
 };
 
-var points = {};
+// let points = {
+//   a: {x: 0, y: 0},
+//   b: {x: 0, y: 0},
+//   c: {x: 0, y: 0},
+//   d: {x: 0, y: 0},
+//   e: {x: 0, y: 0},
+//   f: {x: 0, y: 0}
+// };
 
-// var genRandomPoints = ()=>{
+var layers = {
+  "adventure-escape-game": {
+    x: 0,
+    y: 0,
+    width: 320,
+    height: 640,
+    corner: {
+      nw: "a",
+      sw: "b",
+      se: "d",
+      ne: "e"
+    }
+  }
+};
+
+// var genRandomPoints = function() {
 //  for(let i in regions) {
 //    points[i] = {
 //      x: (regions[i].x|0) + ((Math.random() * region[i].width)|0),
@@ -65,45 +80,23 @@ var points = {};
 //};
 
 // create svg drawing
-var draw = SVG('drawing')
+var draw = SVG('drawing');
 
-        // create image
-        var image1 = draw.image('./res/adventure-escape-game.jpg')
-        var image2 = draw.image('./res/adventure-puzzle-game.jpg')
-        image1.size(320, 480);//.x(320).y(100)
-        image2.size(320, 480).x(320);//.y(100)
+var path = "./res/";
+var ext = ".jpg"
 
-        var group = draw.group()
+for(var layerName in layers) {
+  layers[layerName].image = draw.image(path + layerName + ext);
+  layers[layerName].image.size(
+    layers[layerName].width,
+    layers[layerName].height
+  );
+  layers[layerName].image.x(layers[layerName].x);
+  layers[layerName].image.y(layers[layerName].y);
+  layers[layerName].polyline = draw.polyline([[0,0], [100,50], [50,200]]);
+  layers[layerName].clipWith(layers[layerName].polyline);
+}
 
-        // create text
-//         var text = draw.text('SVG.JS').move(300, 0)
-//         text.font({
-//           family: 'Source Sans Pro'
-//         , size: 180
-//         , anchor: 'middle'
-//         , leading: 1
-//         })
-        
-        var polyline1 = draw.polyline([[0,0], [100,50], [50,200]]);
-        var polyline2 = draw.polyline([[320,0], [420,50], [370,200]]);
-
-        group.add(polyline1);
-        group.add(polyline2);
-
-        // clip image with text
-        image1.clipWith(polyline1);
-        image2.clipWith(polyline2);
-
-        polyline1.animate('1s').plot([[0,0], [0,100], [100,100], [100,50]])
-        polyline2.animate('4s').plot([[0,0], [0,100], [100,100], [100,50]]);
-
-        group.animate().afterAll(function(){
-          alert(7)
-        });
-
-
-
-var path = "res/";
 var names = [
   "adventure-escape-game",
   "adventure-puzzle-game",
@@ -136,4 +129,19 @@ var names = [
   "zuma (Arcanoid Break Classic)",
   "Zuma Deluxe"
 ];
-var ext = ".jpg"
+
+var render = function() {
+    for(var i in layers) {
+      layers[i].polyline.plot([[0,0], [0,100], [100,100], [100,50]]);
+    }
+};
+
+var loop = function() {
+  requestAnimationFrame(loop);
+  render();
+};
+loop();
+
+window.onhashchange(function() {
+  var _link = document.location.hash.substr(1);
+})
