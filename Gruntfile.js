@@ -1,3 +1,7 @@
+if(process.argv.indexOf('dev') >= 0) {
+	console.log('DEV');
+}
+
 module.exports = function(grunt) {
 	
 	grunt.initConfig({
@@ -83,11 +87,11 @@ module.exports = function(grunt) {
 			
 			watch: {
 				scripts: {
-					files: ['res/*.js'],
+					files: ['src/*.js'],
 					tasks: [
 						'concat',
-						'babel' ,
-						'uglify'
+						'babel' //,
+						// 'uglify'
 					],
 					options: {
 						spawn: false

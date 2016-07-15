@@ -1,147 +1,136 @@
-class main {
-	
-	constructor() {
-		console.log(777);
+let init = ()=>{
+
+	draw = SVG('drawing');
+	genImages();
+	genRandomPoints('current');
+	copyToFromAll();
+	genRandomPoints('to');
+	render();
+	loop();
+};
+window.onload = init;
+
+let genImages = ()=>{
+
+	for(var layerName in mesh.layers) {
+		
+		mesh.layers[layerName].image = draw.image(path + layerName + ext);
+		
+		mesh.layers[layerName].image.size(
+			mesh.layers[layerName].width,
+			mesh.layers[layerName].height
+		);
+		
+		mesh.layers[layerName].image.x(mesh.layers[layerName].x);
+		mesh.layers[layerName].image.y(mesh.layers[layerName].y);
+		
+		mesh.layers[layerName].polyline = draw.polyline();
+		mesh.layers[layerName].image.clipWith(mesh.layers[layerName].polyline);
 	}
 }
 
-window.onload = ()=>{new main();};
+let copyToFromAll = (point)=>{
 
-var regions = {
-  a: {
-    x: 100,
-    y: 100,
-    width: 100,
-    height: 100,
-  },
-  b: {
-    x: 100,
-    y: 100,
-    width: 100,
-    height: 100,
-  },
-  c: {
-    x: 100,
-    y: 100,
-    width: 100,
-    height: 100,
-  },
-  d: {
-    x: 100,
-    y: 100,
-    width: 100,
-    height: 100,
-  },
-  e: {
-    x: 100,
-    y: 100,
-    width: 100,
-    height: 100,
-  },
-  f: {
-    x: 100,
-    y: 100,
-    width: 100,
-    height: 100,
-  }
+	for(let regionName in mesh.regions) {
+		copyToFrom(mesh.regions[regionName].point);
+	}
 };
 
-// let points = {
-//   a: {x: 0, y: 0},
-//   b: {x: 0, y: 0},
-//   c: {x: 0, y: 0},
-//   d: {x: 0, y: 0},
-//   e: {x: 0, y: 0},
-//   f: {x: 0, y: 0}
-// };
+let copyToFrom = (point)=>{
 
-var layers = {
-  "adventure-escape-game": {
-    x: 0,
-    y: 0,
-    width: 320,
-    height: 640,
-    corner: {
-      nw: "a",
-      sw: "b",
-      se: "d",
-      ne: "e"
-    }
-  }
-};
-
-// var genRandomPoints = function() {
-//  for(let i in regions) {
-//    points[i] = {
-//      x: (regions[i].x|0) + ((Math.random() * region[i].width)|0),
-//      y: (regions[i].y|0) + ((Math.random() * region[i].height)|0)
-//    };
-//  }
-//};
-
-// create svg drawing
-var draw = SVG('drawing');
-
-var path = "./res/";
-var ext = ".jpg"
-
-for(var layerName in layers) {
-  layers[layerName].image = draw.image(path + layerName + ext);
-  layers[layerName].image.size(
-    layers[layerName].width,
-    layers[layerName].height
-  );
-  layers[layerName].image.x(layers[layerName].x);
-  layers[layerName].image.y(layers[layerName].y);
-  layers[layerName].polyline = draw.polyline([[0,0], [100,50], [50,200]]);
-  layers[layerName].clipWith(layers[layerName].polyline);
+	point.from = {
+		x: point.current.x,
+		y: point.current.y
+	}
 }
 
-var names = [
-  "adventure-escape-game",
-  "adventure-puzzle-game",
-  "box5",
-  "Candy Jump",
-  "closedchain",
-  "Dynamite Game",
-  "Finger maZe 2",
-  "Finger Ski",
-  "Finger snowboard",
-  "FROG JUMP (jump jump jump)",
-  "GHOSTS",
-  "hexagon",
-  "lasergame (lazor game)",
-  "lightnet",
-  "Match 3 (ballshelf)",
-  "match 3 firewall (bubble rush in fire)",
-  "Match six (Hex Jewels)",
-  "platformer (Platformer HD) (на основе Runaway HD)",
-  "Platformer Shooter",
-  "plumbing (Plumber Flow)",
-  "pointsgame (Flow Connection Future)",
-  "pointsgame",
-  "runner (Run Fast) индиана джонс",
-  "tank game",
-  "threecolor (Shift It Fast)",
-  "threecolor (Sliding Blocks)",
-  "UPD lightnet",
-  "webgame (untangle web)",
-  "zuma (Arcanoid Break Classic)",
-  "Zuma Deluxe"
-];
+let genRandomPoint = function(region, point, type='current') {
+
+	point.startTime = new Date().getTime();
+	point.liveTime = 500 + (Math.random() * 1500 | 0);// 500 - 2000 ms.;
+
+	point[type] = {
+		x: (region.x | 0) + ((Math.random() * region.width ) | 0),
+		y: (region.y | 0) + ((Math.random() * region.height) | 0)
+	};
+};
+
+let genRandomPoints = function(type) {
+
+	for(let regionName in mesh.regions) {
+
+		if(!mesh.regions[regionName].point) {
+			mesh.regions[regionName].point = {};
+		}
+		
+		genRandomPoint(mesh.regions[regionName], mesh.regions[regionName].point, type);
+	}
+};
+
+let movePoints = ()=>{
+	
+	let time = new Date().getTime();
+
+	for(let regionName in mesh.regions) {
+		movePoint(mesh.regions[regionName], mesh.regions[regionName].point, time)
+	}
+
+}
+
+let movePoint = (region, point, time)=>{
+
+	let a = {
+		x: point.to.x - point.from.x,
+		y: point.to.y - point.from.y
+	}
+
+	let all = point.startTime + point.liveTime;
+	let live = time - point.startTime;
+
+	if(live < point.liveTime && live > 0) {
+
+		let progress = 1 / point.liveTime * live
+		point.current.x = point.from.x + a.x * progress;
+		point.current.y = point.from.y + a.y * progress;
+	} else {
+		// reset
+		copyToFrom(point);
+		genRandomPoint(region, point, 'to');
+	}
+	time - point.startTime
+};
 
 var render = function() {
-    for(var i in layers) {
-      layers[i].polyline.plot([[0,0], [0,100], [100,100], [100,50]]);
-    }
+		
+		for(let layerName in mesh.layers) {
+		
+			let _corners = [];
+			
+			for(let i in mesh.layers[layerName].corners) {
+
+				let cornerName = mesh.layers[layerName].corners[i];
+
+				_corners.push([
+					mesh.regions[cornerName].point.current.x,
+					mesh.regions[cornerName].point.current.y
+				]);
+			}
+			
+			mesh.layers[layerName].polyline.plot(_corners);
+		}
 };
 
 var loop = function() {
-  requestAnimationFrame(loop);
-  render();
-};
-loop();
+	
+	requestAnimationFrame(loop);
 
-window.onhashchange(function() {
-  var _link = document.location.hash.substr(1);
-})
+	movePoints();
+	render();
+};
+
+window.onhashchange = ()=>{
+	
+	var _link = document.location.hash.substr(1);
+	let src =  document.location.origin + '/' + _link;
+	console.log('open:', src);
+}
