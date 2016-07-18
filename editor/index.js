@@ -3,40 +3,43 @@
 let data = null;
 let images = {};
 
-let _draw = ()=>{
+let addLayer = (_name, _layer)=>{
 
-
-	// let text = $("textarea").val();
-	// data = JSON.parse(text);
-	console.log('draw', mesh);
-	images = {};
-
-	for(let layerName in mesh.layers) {
-		
-		$("#container").append(
+	$("#container").append(
 			$("<img>")
 				.prop({
-					src: '../res/' + layerName + '.jpg',
-					id: layerName
+					src: '../res/' + _name + '.jpg',
+					id: _name
 				})
 		);
-		$('#' + layerName)
+		$('#' + _name)
 			.css({
-				width: mesh.layers[layerName].width + 'px',
-				height: mesh.layers[layerName].height + 'px',
-				top: mesh.layers[layerName].y + 'px',
-				left: mesh.layers[layerName].x + 'px'
+				width  : _layer.width  + 'px',
+				height : _layer.height + 'px',
+				top    : _layer.y      + 'px',
+				left   : _layer.x      + 'px'
 			})
 			.resizable({
-		      aspectRatio: mesh.layers[layerName].width / mesh.layers[layerName].height
-		    })
+	      aspectRatio: _layer.width / _layer.height
+	    })
 			.parent()
 				.draggable({
 					stack: ".drag",
 					grid:[10, 10]
 				})
 				.addClass("drag")
-				.css({position: 'absolute'})
+				.css({position: 'absolute'});
+};
+
+let _draw = ()=>{
+
+	// let text = $("textarea").val();
+	// data = JSON.parse(text);
+	images = {};
+
+	for(let layerName in mesh.layers) {
+
+		addLayer(layerName, mesh.layers[layerName]);
 	}
 };
 
@@ -49,43 +52,90 @@ let _get = ()=>{
 	}
 };
 
+let addControl = (attr)=>{
+
+	$('#controls').append(
+		$('<div>').append(
+			$('<label>')
+				.append(
+					$('<span>')
+						.html(attr + ':')
+				)
+				.append(
+					$('<input>')
+						.prop({
+							id: 'input-' + attr,
+							value: null
+						})
+				)
+		)
+	);
+}
+
 let _controls = ()=>{
 
 	let o = {};
 	for(let attr in layerModel) {
-		switch(layerModel[attr]) {
-			case "int":
-				o[attr] = 0;
-				$('#controls').append(
-					$('<div>').append(
-						$('<label>')
-							.append(
-								$('<span>')
-									.html(attr + ':')
-							)
-							.append(
-								$('<input>')
-									.prop({
-										id: 'input-' + attr,
-										value: 0
-									})
-							)
-					)
-				);
-				break;
-			case "array":
-				o[attr] = [];
-				break;
+	
+		if(layerModel[attr] == "int") {
+			o[attr] = 0;
 		}
+		
+		if(layerModel[attr] == "string") {
+			o[attr] = "";
+		}
+		
+		if(layerModel[attr] == "array") {
+				o[attr] = [];
+		}
+
+		if(
+			layerModel[attr] == "int"    ||
+			layerModel[attr] == "string"
+		) {
+
+			addControl(attr);
+		}
+	
+		
+	
 	}
-	$('#controls').append(
-		$('<button>')
-			.text('Close Controls')
-	);
+	// $('#controls').append(
+	// 	$('<button>')
+	// 		.text('Close Controls')
+	// );
+};
+
+let fillChanges = (_changes)=>{
+
+	for(let i in _changes) {
+		$('#input-' + i).prop({value: _changes[i]});
+	}
+}
+
+// let _changes = null;
+
+let _callback = (e)=>{
+	
+	if(e.target.className.indexOf('ui-resizable') >= 0) {
+
+		let _changes = {
+			id     : e.target.id                   ,
+			width  : e.target.width                ,
+			height : e.target.height               ,
+			x      : e.target.parentNode.offsetLeft,
+			y      : e.target.parentNode.offsetTop
+		};
+
+		fillChanges(_changes);
+	}
+
 };
 
 window.onload = ()=>{
 	
+	document.body.addEventListener('mousedown', _callback);
+
 	// $("#draw").click(_draw);
 	_draw();
 

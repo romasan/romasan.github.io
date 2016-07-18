@@ -41,11 +41,12 @@ var ext = ".jpg"
 // c d   -> ^
 // [a, c, d, b]
 let layerModel = {
-  "x"        : "int",
-  "y"        : "int",
-  "width"    : "int",
-  "height"   : "int",
-  "corners"  : "array"
+  "id"      : "string",
+  "x"       : "int"   ,
+  "y"       : "int"   ,
+  "width"   : "int"   ,
+  "height"  : "int"   ,
+  "corners" : "array"
 };
 
 let mesh = {
