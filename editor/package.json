@@ -1,0 +1,9 @@
+{
+  "name": "ghPageEditor",
+  "version": "0.0.1",
+  "author": "Roman Bauer",
+  "email": "kotapesic@gmail.com",
+  "scripts": {
+    "build": "node node_modules/grunt-cli/bin/grunt"
+  }
+}

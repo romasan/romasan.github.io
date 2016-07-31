@@ -40,14 +40,6 @@ var ext = ".jpg"
 // a b   V <-
 // c d   -> ^
 // [a, c, d, b]
-let layerModel = {
-  "id"      : "string",
-  "x"       : "int"   ,
-  "y"       : "int"   ,
-  "width"   : "int"   ,
-  "height"  : "int"   ,
-  "corners" : "array"
-};
 
 let mesh = {
   "regions": {
@@ -100,8 +92,6 @@ let mesh = {
       "y": 0,
       "width": 320,
       "height": 480,
-      "liveTime": 500,
-      "startTime": null,
       "corners": [
         "a",
         "d",
@@ -114,14 +104,19 @@ let mesh = {
       "y": 0,
       "width": 320,
       "height": 480,
-      "liveTime": 500,
-      "startTime": null,
       "corners": [
         "b",
         "e",
         "f",
         "c"
       ]
+    },
+    "laser-game": {
+      "x": 320,
+      "y": 0,
+      "width": 320,
+      "height": 480,
+      "corners": []
     }
   }
 };
