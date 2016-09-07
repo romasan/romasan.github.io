@@ -3,63 +3,72 @@
 
 	<script src="./js/jquery.min.js"></script>
 	<!-- <script src=".js/masonry.pkgd.min.js"></script> -->
-	<script src="./js/jquery.xgallerify.js"></script>
+	<script src="./js/jquery.xgallerify.min.js"></script>
+	<!-- <script src="../src/data.js"></script> -->
 	
-	<script src="../src/data.js"></script>
 	<script>
 
-	var _layers = [
-		{name : "adventure-escape-game"},
-		{name : "adventure-puzzle-game"},
-		{name : "closed-chain-game"},
-		{name : "flow-connection-game"},
-		{name : "shift-it-fast-game"},
-		{name : "sliding-blocks-game"},
-		{name : "tanks-game"},
-		{name : "untangle-web-game"},
-		{name : "hexagon-game"},
-		{name : "laser-game"},
-		
-		{name : "avatar"},
-		
-		{name : "box5"},
-		{name : "Candy Jump"},
-		{name : "Dynamite Game"},
-		{name : "Finger maZe 2"},
-		{name : "Finger Ski"},
-		{name : "Finger snowboard"},
-		{name : "FROG JUMP (jump jump jump)"},
-		{name : "GHOSTS"},
-		{name : "lightnet"},
-		{name : "Match 3 (ballshelf)"},
-		{name : "match 3 firewall (bubble rush in fire)"},
-		{name : "Match six (Hex Jewels)"},
-		{name : "platformer (Platformer HD) (на основе Runaway HD)"},
-		{name : "Platformer Shooter"},
-		{name : "plumber-flow-game"},
-		{name : "pointsgame"},
-		{name : "runner (Run Fast) индиана джонс"},
-		{name : "UPD lightnet"},
-		{name : "zuma (Arcanoid Break Classic)"},
-		{name : "Zuma Deluxe"}
-	];
+		var _layers = [
+			{name : "adventure-escape-game"},
+			{name : "adventure-puzzle-game"},
+			{name : "closed-chain-game"},
+			{name : "flow-connection-game"},
+			{name : "shift-it-fast-game"},
+			{name : "sliding-blocks-game"},
+			{name : "tanks-game"},
+			{name : "untangle-web-game"},
+			{name : "hexagon-game"},
+			{name : "laser-game"},
+			
+			{name : "avatar"},
+			
+			{name : "box5"},
+			{name : "Candy Jump"},
+			{name : "Dynamite Game"},
+			{name : "Finger maZe 2"},
+			{name : "Finger Ski"},
+			{name : "Finger snowboard"},
+			{name : "FROG JUMP (jump jump jump)"},
+			{name : "GHOSTS"},
+			{name : "lightnet"},
+			{name : "Match 3 (ballshelf)"},
+			{name : "match 3 firewall (bubble rush in fire)"},
+			{name : "Match six (Hex Jewels)"},
+			{name : "platformer (Platformer HD) (на основе Runaway HD)"},
+			{name : "Platformer Shooter"},
+			{name : "plumber-flow-game"},
+			{name : "pointsgame"},
+			{name : "runner (Run Fast) индиана джонс"},
+			{name : "UPD lightnet"},
+			{name : "zuma (Arcanoid Break Classic)"},
+			{name : "Zuma Deluxe"}
+		];
+
 		// $('.grid').masonry({
 		//   // options...
 		//   itemSelector: '.grid-item',
 		//   columnWidth: 200
 		// });
+		
 		var generator = function() {
+
 			for(let i in _layers) {
-				$('.protos').append(
-					$('<div>').addClass('photo')
-					.append(
-						$('<img>').prop({src: '../res/' + _layers[i].name + '.jpg'})
-					)
-				)
+				$('.photos').append(
+					$('<div>')
+						.addClass('photo')
+						.append(
+							$('<img>')
+								.prop({
+									src: '../res/' + _layers[i].name + '.jpg'
+								})
+						)
+				);
 			}
 		};
 		
 		window.onload = function() {
+
+			generator();
 			
 			var gallery = $('.photos').gallerify({
 				margin: 0,
@@ -196,9 +205,6 @@
 		<div class="photo">
 			<img src="../res/Zuma Deluxe.jpg">
 		</div> -->
-		<script type="text/javascript">
-			generator();
-		</script>
 	</div>
 </body>
 </html>
