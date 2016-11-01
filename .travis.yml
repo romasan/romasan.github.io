@@ -1,0 +1,11 @@
+language: node_js
+
+before_install: npm i
+
+os:
+  - linux
+
+node_js:
+  - "6"
+
+script: npm run build
