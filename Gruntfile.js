@@ -34,6 +34,7 @@ module.exports = function(grunt) {
 			concat: {
 				dist: {
 					src: [
+						'src/data.js',
 						'src/index.js',
 						'src/*.js'
 					],

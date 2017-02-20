@@ -1,5 +1,4 @@
 let init = e => {
-
 	draw = SVG('drawing');
 	genImages();
 	genRandomPoints('current');
