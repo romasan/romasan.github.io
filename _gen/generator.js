@@ -141,7 +141,6 @@ let statistic = e => {
 		_layers[i].newWidth  = _layers[i].width * (rowHeight / _layers[i].height);
 
 		sumNewWidth += _layers[i].newWidth;
-
 	}
 
 	let rowWidth = (sumNewWidth / rowsCount) | 0;
