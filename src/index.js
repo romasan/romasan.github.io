@@ -9,7 +9,7 @@ let init = e => {
 	loop();
 };
 
-window.onload = init;
+// window.onload = init;
 
 let genImages = e => {
 

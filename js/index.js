@@ -341,7 +341,7 @@ var init = function init(e) {
   loop();
 };
 
-window.onload = init;
+// window.onload = init;
 
 var genImages = function genImages(e) {
 
@@ -465,18 +465,54 @@ window.onhashchange = function (e) {
 
 console.log('NEXT');
 
-window.innerWidth;
-window.innerHeight;
-
 var boxMinSize = 200;
 var boxMaxSize = 400;
 
 var minWindowWidth = 400;
 var minWindowHeight = 400;
 
+var pageWidth = window.innerWidth < minWindowWidth ? minWindowWidth : window.innerWidth;
+var pageHeight = window.innerHeight < minWindowHeight ? minWindowHeight : window.innerHeight;
+
 var linesMin = 3;
 
 var boxes = [];
 
 var boxesCount = 23; // boxes.length
+
+// draw = SVG('drawing');
+
+var add = function add(size, left, top, color) {
+  var el = document.createElement('div');
+  el.classList.add('box');
+  el.style.top = top + 'px';
+  el.style.left = left + 'px';
+  el.style.width = size + 'px';
+  el.style.height = size + 'px';
+  el.style.background = color;
+  document.body.appendChild(el);
+};
+
+var rows = 2;
+var boxSize = pageHeight / rows;
+var cols = pageWidth / boxSize;
+
+var marginLeft = cols % 1 / (cols | 0);
+
+var randomColor = function randomColor(e) {
+  var color = '#' + ((Math.random() * (0xffffff - 0x100000) | 0) + 0x100000).toString(16);
+  console.log(color);
+  return color;
+};
+
+document.addEventListener("DOMContentLoaded", function (e) {
+
+  console.log(rows, cols);
+
+  for (var x = 0; x < cols; x += 1) {
+    for (var y = 0; y < rows; y += 1) {
+      add(boxSize, x * boxSize - boxSize * x * (marginLeft / (cols | 0)), y * boxSize, randomColor());
+    }
+  }
+});
 //# sourceMappingURL=index.js.map

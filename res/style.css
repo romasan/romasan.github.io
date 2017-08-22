@@ -8,11 +8,17 @@ body {
 	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABQSURBVEhL7dSxDQAwCANB9l+LwUgPxctt9NQWKCdCdVgTVoX9O+w/DkAxiSS63xBNVsAtQrEPiPCNK5Ce93IAkUlEQi2RRPeQoMkKuEUo9gCLbIyXKw6BsAAAAABJRU5ErkJggg==')
 }
 
+.box {
+   position: absolute;
+   opacity: 0.5;
+}
+
 #phone {
   background-image: url('./phone.png');
   width: 700px;
   height: 1330px;
   transform: scale(0.5);
+  display: none;
 }
 
 #phone_screen {
@@ -29,6 +35,7 @@ body {
   position: absolute;
   top: 0px;
   right: 0px;
+  z-index: 999;
 }
 
 .octo-corner {
