@@ -8,7 +8,8 @@
     "url": "https://github.com/romasan/romasan.github.io.git"
   },
   "scripts": {
-    "build": "node node_modules/grunt-cli/bin/grunt"
+    "build": "node node_modules/grunt-cli/bin/grunt",
+    "dev": "node node_modules/grunt-cli/bin/grunt dev"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.9.0",
