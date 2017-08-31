@@ -15,6 +15,9 @@ let boxes = [];
 
 let boxesCount = 23; // boxes.length
 
+const screenWidth  = window.screen.width  / window.devicePixelRatio;
+const screenHeight = window.screen.height / window.devicePixelRatio;
+
 // draw = SVG('drawing');
 
 let add = (size, left, top, color) => {
@@ -31,8 +34,9 @@ let add = (size, left, top, color) => {
 let rows = 2;
 let boxSize = pageHeight / rows;
 let cols = pageWidth / boxSize;
+let colsA = cols | 0;
 
-let marginLeft = cols % 1 / (cols | 0);
+// let marginLeft = cols % 1 / (cols | 0);
 
 let randomColor = e => {
     let color = '#' + (((Math.random() * (0xffffff - 0x100000)) | 0) + 0x100000).toString(16);
@@ -40,13 +44,16 @@ let randomColor = e => {
     return color;
 }
 
+let margin = (i) => (boxSize * cols - boxSize * colsA) / colsA;
+
 document.addEventListener("DOMContentLoaded", e => {
 
     console.log(rows, cols);
 
     for(let x = 0; x < cols; x += 1) {
         for(let y = 0; y < rows; y += 1) {
-            add(boxSize, x * boxSize - (boxSize * x * (marginLeft / (cols | 0))), y * boxSize, randomColor());
+            // add(boxSize, x * boxSize - (boxSize * x * (marginLeft / (cols | 0))), y * boxSize, randomColor());
+            add(boxSize, x * boxSize - margin(x), y * boxSize, randomColor());
         }
     }
 });

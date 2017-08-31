@@ -480,6 +480,9 @@ var boxes = [];
 
 var boxesCount = 23; // boxes.length
 
+var screenWidth = window.screen.width / window.devicePixelRatio;
+var screenHeight = window.screen.height / window.devicePixelRatio;
+
 // draw = SVG('drawing');
 
 var add = function add(size, left, top, color) {
@@ -496,13 +499,18 @@ var add = function add(size, left, top, color) {
 var rows = 2;
 var boxSize = pageHeight / rows;
 var cols = pageWidth / boxSize;
+var colsA = cols | 0;
 
-var marginLeft = cols % 1 / (cols | 0);
+// let marginLeft = cols % 1 / (cols | 0);
 
 var randomColor = function randomColor(e) {
   var color = '#' + ((Math.random() * (0xffffff - 0x100000) | 0) + 0x100000).toString(16);
   console.log(color);
   return color;
+};
+
+var margin = function margin(i) {
+  return (boxSize * cols - boxSize * colsA) / colsA;
 };
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -511,7 +519,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
   for (var x = 0; x < cols; x += 1) {
     for (var y = 0; y < rows; y += 1) {
-      add(boxSize, x * boxSize - boxSize * x * (marginLeft / (cols | 0)), y * boxSize, randomColor());
+      // add(boxSize, x * boxSize - (boxSize * x * (marginLeft / (cols | 0))), y * boxSize, randomColor());
+      add(boxSize, x * boxSize - margin(x), y * boxSize, randomColor());
     }
   }
 });
