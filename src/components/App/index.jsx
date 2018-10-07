@@ -5,16 +5,23 @@ import actions from '../../actions';
 import './App.scss';
 class App extends Component {
   componentDidMount () {
-    this.props.actions.setList(['1','2','3'])
-  }
-  test () {
-    this.props.actions.setList(['q','w','e'])
+    fetch('https://api.github.com/users/romasan/repos')
+      .then(resp => resp.json())
+      .then(data => {
+        console.log('#', data);
+        this.props.actions.setList(data.map(e => ({
+          label: e.name,
+          url: e.html_url
+        })));
+      });
   }
   render () {
     return (
       <div className="app">
-        <div className="btn" onClick={() => this.test()}>List:</div>
-        {this.props.list.map((e, i) => <div key={i}>{e}</div>)}
+        <div className="head">Projects:</div>
+        {this.props.list.map((e, i) => <a href={e.url}>
+          <div className="item" key={i}>{e.label}</div>
+        </a>)}
       </div>
     );
   }
