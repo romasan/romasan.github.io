@@ -1,4 +1,4 @@
-import types from '../actions/types.json';
+import types from '../actions/constants.json';
 
 const actions = {
     [types.SET_LIST]: (state, payload) => {

@@ -1,4 +1,4 @@
-import types from './types.json';
+import types from './constants.json';
 
 export default {
     setList: list => ({

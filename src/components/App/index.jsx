@@ -19,8 +19,8 @@ class App extends Component {
     return (
       <div className="app">
         <div className="head">Projects:</div>
-        {this.props.list.map((e, i) => <a href={e.url}>
-          <div className="item" key={i}>{e.label}</div>
+        {this.props.list.map((e, i) => <a href={e.url} key={i}>
+          <div className="item">{e.label}</div>
         </a>)}
       </div>
     );
