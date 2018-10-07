@@ -1,0 +1,29 @@
+body {
+  margin: 30px 50px 0px 50px;
+  background: #fbfbfb; }
+
+.app {
+  /*text-align: center;*/ }
+  .app .head {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: Courier New;
+    font-weight: bold;
+    font-size: 20pt;
+    height: 40px; }
+  .app .item {
+    background: #f3f3f3;
+    padding: 5px;
+    display: inline-block;
+    border: 1px solid #e2e2e2;
+    margin: 3px;
+    border-radius: 3px;
+    transition: 0.5s;
+    color: #484848; }
+  .app a {
+    text-decoration: none; }
+    .app a:hover .item {
+      background: #ff0000;
+      border: 1px solid #ff0000;
+      color: #ffffff; }
+
