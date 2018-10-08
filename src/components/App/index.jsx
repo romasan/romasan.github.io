@@ -5,7 +5,10 @@ import actions from '../../actions';
 import './App.scss';
 class App extends Component {
   componentDidMount () {
-    fetch('https://api.github.com/users/romasan/repos')
+
+    const API_URL = 'https://api.github.com/users/romasan/repos?per_page=1000';
+
+    fetch(API_URL)
       .then(resp => resp.json())
       .then(data => {
         console.log('#', data);
