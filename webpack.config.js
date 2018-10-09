@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 module.exports = {
     entry: './src/index.js',
@@ -27,6 +29,12 @@ module.exports = {
       path: __dirname + '/dist',
       publicPath: '/dist',
       filename: 'bundle.js'
+    },
+    optimization: {
+        minimizer: [
+            new UglifyJsPlugin({}),
+            new OptimizeCSSAssetsPlugin({})
+        ]
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),

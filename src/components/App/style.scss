@@ -1,0 +1,22 @@
+* {
+  user-select: none;
+}
+html {
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  margin: 30px 50px 0px 50px;
+  padding: 0px;
+  background: #fbfbfb;
+}
+.app {
+  .head {
+    text-align: center;
+    text-transform: uppercase;
+    font-family: Courier New;
+    font-weight: bold;
+    font-size: 20pt;
+    height: 40px;
+  }
+}
