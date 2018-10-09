@@ -4,26 +4,13 @@ import {bindActionCreators} from 'redux';
 import actions from '../../actions';
 import './App.scss';
 class App extends Component {
-  componentDidMount () {
-
-    const API_URL = 'https://api.github.com/users/romasan/repos?per_page=1000';
-
-    fetch(API_URL)
-      .then(resp => resp.json())
-      .then(data => {
-        console.log('#', data);
-        this.props.actions.setList(data.map(e => ({
-          label: e.name,
-          url: e.html_url
-        })));
-      });
-  }
+  // componentDidMount () {}
   render () {
     return (
       <div className="app">
         <div className="head">Projects:</div>
-        {this.props.list.map((e, i) => <a href={e.url} key={i}>
-          <div className="item">{e.label}</div>
+        {this.props.list.map((e, i) => <a href={e.html_url} key={i}>
+          <div className="item">{e.name}</div>
         </a>)}
       </div>
     );
