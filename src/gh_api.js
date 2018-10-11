@@ -1,9 +1,17 @@
-const API_REPOS_URL = 'https://api.github.com/users/{owner}/repos?per_page=1000';
+import axios from 'axios';
+
+const API_REPOS_URL = 'https://api.github.com/users/{owner}/repos';
 
 export const getRepos = owner => {
-    return fetch(API_REPOS_URL.replace('{owner}', owner))
-        .then(resp => resp.json())
-        .then(data => data
+    return axios.get(
+        API_REPOS_URL.replace('{owner}', owner),
+        {
+            'params': {
+                'per_page': 1000
+            }
+        }
+    )
+        .then(resp => (resp && Array.isArray(resp.data) && resp.data || [])
             .filter(e => e && !e.name.includes('github'))
             .map(({name, description, html_url, homepage}) => ({
                 name, description, html_url, homepage

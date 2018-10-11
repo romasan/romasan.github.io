@@ -1,17 +1,15 @@
 .card {
     position: relative;
     background: #f3f3f3;
-    padding: 5px;
     display: inline-block;
     border: 1px solid #e2e2e2;
     margin: 3px;
     border-radius: 3px;
     transition: 0.5s;
-    color: #484848;
-    width: 200px;
-    height: 200px;
+    width: 256px;
+    height: 256px;
     overflow: hidden;
-    color: #484848;
+    color: #ffffff;
     .description {
         overflow-wrap: break-word;
     }
@@ -21,16 +19,25 @@
     &:hover {
         background: #ff0000;
         border: 1px solid #000000;
-        color: #ffffff;
-        a {
-            color: #ffffff;
-        }
         .octo-corner {
             top: 0px;
             right: 0px;
         }
+        .info {
+            height: auto;
+            bottom: 0px;
+        }
     }
     a {
-        color: #000000;
+        color: #ffffff;
+    }
+    .info {
+        transition: 0.5s;
+        background: rgba(0, 0, 0, .5);
+        width: 100%;
+        height: 0px;
+        position: absolute;
+        bottom: -10px;
+        padding: 5px;
     }
 }
