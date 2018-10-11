@@ -31,9 +31,14 @@ class Card extends Component {
     return (
       <div className="card">
         <div className="layer-1">
-            test-label
+            {name}
         </div>
-        <div className="layer-2"></div>
+        <div className="layer-2"
+            style={{
+                background: `url(${homepage}/preview/320x320.jpg)`,
+                backgroundSize: 'contain'
+            }}
+        ></div>
         <div className="info">
             <div>
                 {homepage ? <a href={homepage}>{name}</a> : name}
