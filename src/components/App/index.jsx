@@ -5,7 +5,6 @@ import actions from '../../actions';
 import './style.scss';
 import Card from '../Card';
 class App extends Component {
-  // componentDidMount () {}
   render () {
     return (
       <div className="app">

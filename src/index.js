@@ -9,6 +9,7 @@ import { getRepos } from './gh_api';
 const { setList } = actions;
 
 getRepos('romasan').then(list => {
+    list = list.filter(item => !['test', 'debug'].includes(item.name.split('-').shift()));
     store.dispatch(setList(list));
 });
 

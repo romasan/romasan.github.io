@@ -16,6 +16,5 @@ export const getRepos = owner => {
             .map(({name, description, html_url, homepage}) => ({
                 name, description, html_url, homepage
             }))
-            // .sort(() => Math.random() - .5)
         );
 }
