@@ -9,6 +9,7 @@ class App extends Component {
     return (
       <div className="app">
         <div className="head">Projects:</div>
+        <div><center>Однажды я доделаю это ****е портфолио...</center></div>
         {this.props.list.map((item, i) => <Card key={i} item={item}/>)}
       </div>
     );
