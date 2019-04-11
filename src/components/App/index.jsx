@@ -8,9 +8,8 @@ class App extends Component {
   render () {
     return (
       <div className="app">
-        <div className="head">Projects:</div>
-        <div><center>Однажды я доделаю это ****е портфолио...</center></div>
-        {this.props.list.map((item, i) => <Card key={i} item={item}/>)}
+        <div className="head"><span className="label">Projects</span></div>
+        <div>{this.props.list.map((item, i) => <Card key={i} item={item}/>)}</div>
       </div>
     );
   }

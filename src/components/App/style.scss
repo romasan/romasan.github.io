@@ -1,22 +1,54 @@
+@font-face {
+  font-family: 'Rialto NF Font';
+  src: url('/res/RialtoNF.otf');
+}
+
 * {
   user-select: none;
 }
+
 html {
   margin: 0px;
   padding: 0px;
 }
 body {
-  margin: 30px 10px 10px 10px;
+  margin: 10px;
   padding: 0px;
-  background: #fbfbfb;
+  background-color: #000000;
+  background: radial-gradient(#0c3c40, #000000);
+  background-attachment: fixed;
 }
 .app {
+  text-align: center;
   .head {
-    text-align: center;
     text-transform: uppercase;
-    font-family: "Courier New";
-    font-weight: bold;
-    font-size: 20pt;
-    height: 40px;
+    font-family: "Rialto NF Font";
+    font-size: 24pt;
+    line-height: 50px;
+    color: #f4e5cb;
+    margin-bottom: 10px;
+    .label {
+      position: relative;
+      &:before {
+        content: '';
+        width: 150%;
+        height: 3px;
+        display: inline-block;
+        position: absolute;
+        left: -25%;
+        background-color: #f4e5cb;
+        top: -9px;
+      }
+      &:after {
+        content: '';
+        width: 150%;
+        height: 3px;
+        display: inline-block;
+        position: absolute;
+        left: -25%;
+        background-color: #f4e5cb;
+        bottom: -6px;
+      }
+    }
   }
 }
