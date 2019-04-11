@@ -2,8 +2,8 @@
     position: relative;
     background: #f3f3f3;
     display: inline-block;
-    border: 1px solid #e2e2e2;
-    margin: 3px;
+    border: 1px solid #feffd3;
+    margin: 3px 5px;
     border-radius: 3px;
     width: 200px;
     height: 200px;
@@ -37,7 +37,6 @@
     }
     &:hover {
         filter: sepia(0%);
-        border: 1px solid #888888;
         .octo-corner {
             top: 0px;
             right: 0px;

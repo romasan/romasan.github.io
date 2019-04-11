@@ -10,12 +10,13 @@
 html {
   margin: 0px;
   padding: 0px;
+  height: 100%;
 }
 body {
   margin: 10px;
   padding: 0px;
   background-color: #000000;
-  background: radial-gradient(#0c3c40, #000000);
+  background-image: radial-gradient(closest-corner, #0c3c40, #000000);
   background-attachment: fixed;
 }
 .app {
