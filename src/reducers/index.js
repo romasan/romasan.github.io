@@ -2,7 +2,14 @@ import types from '../actions/constants.json';
 
 const actions = {
     [types.SET_LIST]: (state, payload) => {
-        return {...state, list: payload};
+        return {
+            ...state,
+            list: payload
+                .filter(({ name, homepage }) => (
+                    console.log('%c/' + name, 'color:' + (homepage ? 'green' : 'grey')),
+                    homepage
+                ))
+        };
     }
 };
 

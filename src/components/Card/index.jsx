@@ -1,29 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './style.scss';
 import './octo-corner.css';
 import axios from 'axios';
 
 class Card extends Component {
-  componentDidMount () {
-
-    /*
-    const {homepage} = this.props.item;
-
-    const PREVIEW_URL = homepage + '/preview/preview.json';
-    
-    if (homepage) {
-
-        axios.get(PREVIEW_URL)
-            .then(resp => {
-                console.log('done:', resp);
-            })
-            .catch(resp => {
-                console.log('fail:', resp);
-                return
-            });
-    }
-    */
-  }
   render () {
 
     const {name, description, html_url, homepage} = this.props.item;
