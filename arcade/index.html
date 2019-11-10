@@ -1,0 +1,107 @@
+<html>
+    <head>
+        <title>arcade</title>
+    </head>
+    <body>
+        <div class="arcade">
+            <div class="top">
+                <div class="top-left"></div>
+                <div class="top-center"></div>
+                <div class="top-right"></div>
+            </div>
+            <div class="middle">
+                <div class="middle-left"></div>
+                <div class="content"></div>
+                <div class="middle-right"></div>
+            </div>
+            <div class="bottom">
+                <div class="bottom-left"></div>
+                <div class="bottom-center">
+                    <div class="joystick"></div>
+                    <div class="buttons"></div>
+                </div>
+                <div class="bottom-right"></div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<style>
+html, body {
+    margin: 0px;
+}
+body {
+    background-color: #ff00ff;
+}
+.arcade {
+    width: 80%;
+    left: 10%;
+    position: relative;
+}
+.top {
+    display: flex;
+}
+.top-left {
+    width: 112px;
+    height: 165;
+    background-image: url('./top-left.png');
+}
+.top-center {
+    width: calc(100% - 224px);
+    height: 165;
+    background-image: url('./top.png');
+}
+.top-right {
+    width: 112px;
+    height: 165;
+    background-image: url('./top-right.png');
+}
+.middle {
+    display: flex;
+    height: calc(100% - 314px);
+}
+.middle-left {
+    width: 112px;
+    background-image: url('./center-left.png');
+    background-size: 100% 100%;
+}
+.content {
+    width: calc(100% - 224px);
+    background-color: #000000;
+}
+.middle-right {
+    width: 112px;
+    background-image: url('./center-right.png');
+    background-size: 100% 100%;
+}
+.bottom {
+    display: flex;
+}
+.bottom-left {
+    width: 112px;
+    height: 149px;
+    background-image: url('./bottom-left.png');
+}
+.bottom-center {
+    width: calc(100% - 224px);
+    height: 149px;
+    background-image: url('./bottom.png');
+    display: flex;
+}
+.bottom-right {
+    width: 112px;
+    height: 149px;
+    background-image: url('./bottom-right.png');
+}
+.joystick {
+    width: 52px;
+    height: 149px;
+    background-image: url('./joystick.png');
+}
+.buttons {
+    width: 112px;
+    height: 149px;
+    background-image: url('./buttons.png');
+    margin-left: auto;
+}
+</style>
